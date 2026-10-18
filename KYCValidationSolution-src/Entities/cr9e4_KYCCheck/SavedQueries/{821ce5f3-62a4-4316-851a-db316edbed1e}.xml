@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{821ce5f3-62a4-4316-851a-db316edbed1e}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cr9e4_kyccheck1" select="1" icon="1" preview="1">
+        <row name="result" id="cr9e4_kyccheckid">
+          <cell name="cr9e4_kyccheck1" width="300" />
+          <cell name="cr9e4_checktype" width="150" />
+          <cell name="cr9e4_status" width="150" />
+          <cell name="cr9e4_source" width="150" />
+          <cell name="cr9e4_result" width="150" />
+          <cell name="cr9e4_resultstatus" width="150" />
+          <cell name="cr9e4_evidence" width="150" />
+          <cell name="cr9e4_checkdate" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cr9e4_kyccheck">
+          <attribute name="cr9e4_kyccheckid" />
+          <attribute name="cr9e4_kyccheck1" />
+          <attribute name="createdon" />
+          <order attribute="cr9e4_kyccheck1" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="cr9e4_checktype" />
+          <attribute name="cr9e4_status" />
+          <attribute name="cr9e4_source" />
+          <attribute name="cr9e4_result" />
+          <attribute name="cr9e4_resultstatus" />
+          <attribute name="cr9e4_evidence" />
+          <attribute name="cr9e4_checkdate" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active KYC Checks" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

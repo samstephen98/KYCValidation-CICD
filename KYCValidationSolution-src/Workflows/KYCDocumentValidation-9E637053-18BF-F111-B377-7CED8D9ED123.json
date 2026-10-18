@@ -1,0 +1,267 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_fa302270"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "d0e5382d-5da1-4f09-8265-721352d4337d"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "new_kycdocument",
+              "subscriptionRequest/scope": 4
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        }
+      },
+      "actions": {
+        "Get_a_row_by_ID": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "539b30b6-926c-423a-b0dd-85284bbdb9a5"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "new_customers",
+              "recordId": "@triggerOutputs()?['body/_new_customer_value']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        },
+        "List_rows": {
+          "runAfter": {
+            "Get_a_row_by_ID": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "new_kycdocuments",
+              "$filter": "new_documentnumber eq '@{triggerOutputs()?['body/new_documentnumber']}'"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        },
+        "Condition_1": {
+          "actions": {
+            "Update_a_row_1": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "new_kycdocuments",
+                  "recordId": "@triggerOutputs()?['body/new_kycdocumentid']",
+                  "item/new_remarks": "Duplicate Document Number",
+                  "item/new_verificationstatus": 100000002
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              }
+            },
+            "Add_a_new_row": {
+              "runAfter": {
+                "Update_a_row_1": [
+                  "Succeeded"
+                ]
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "new_kycvalidations",
+                  "item/new_Customer@odata.bind": "@concat(\r\n    'new_customers(',\r\n    outputs('Get_a_row_by_ID')?['body/new_CustomerId'],\r\n    ')'\r\n)",
+                  "item/new_validationdate": "@utcNow()",
+                  "item/new_validationremarks": "Duplicate Document Number",
+                  "item/new_validationresult": 100000002
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Condition": {
+                "actions": {
+                  "Update_a_row": {
+                    "metadata": {
+                      "operationMetadataId": "0fc6dd29-bd64-4007-af4f-88a745c9a659"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "parameters": {
+                        "entityName": "new_kycdocuments",
+                        "recordId": "@triggerOutputs()?['body/new_kycdocumentid']",
+                        "item/new_remarks": "Document number validation completed successfully",
+                        "item/new_verificationstatus": 100000001
+                      },
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord",
+                        "connectionName": "shared_commondataserviceforapps"
+                      }
+                    }
+                  },
+                  "Add_a_new_row_SUCCESS_VALID": {
+                    "runAfter": {
+                      "Update_a_row": [
+                        "Succeeded"
+                      ]
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "parameters": {
+                        "entityName": "new_kycvalidations",
+                        "item/new_Customer@odata.bind": "@concat(\r\n    'new_customers(',\r\n    outputs('Get_a_row_by_ID')?['body/new_CustomerId'],\r\n    ')'\r\n)",
+                        "item/new_validationdate": "@utcNow()\r\n",
+                        "item/new_validationremarks": "KYC document validation completed successfully",
+                        "item/new_validationresult": 100000001
+                      },
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                        "operationId": "CreateRecord",
+                        "connectionName": "shared_commondataserviceforapps"
+                      }
+                    }
+                  }
+                },
+                "else": {
+                  "actions": {
+                    "Update_a_row_2": {
+                      "metadata": {
+                        "operationMetadataId": "77589853-4b6c-4590-843b-34c7009ce063"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "parameters": {
+                          "entityName": "new_kycdocuments",
+                          "recordId": "@triggerOutputs()?['body/new_kycdocumentid']",
+                          "item/new_remarks": "Document number is missing.",
+                          "item/new_verificationstatus": 100000002
+                        },
+                        "host": {
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                          "operationId": "UpdateOnlyRecord",
+                          "connectionName": "shared_commondataserviceforapps"
+                        }
+                      }
+                    },
+                    "Add_a_new_row_FAILED_VALID": {
+                      "runAfter": {
+                        "Update_a_row_2": [
+                          "Succeeded"
+                        ]
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "parameters": {
+                          "entityName": "new_kycvalidations",
+                          "item/new_Customer@odata.bind": "@concat(\r\n    'new_customers(',\r\n    outputs('Get_a_row_by_ID')?['body/new_CustomerId'],\r\n    ')'\r\n)",
+                          "item/new_validationdate": "@utcNow()",
+                          "item/new_validationremarks": "KYC document validation failed - Document Number missing",
+                          "item/new_validationresult": 100000002
+                        },
+                        "host": {
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                          "operationId": "CreateRecord",
+                          "connectionName": "shared_commondataserviceforapps"
+                        }
+                      }
+                    }
+                  }
+                },
+                "expression": {
+                  "and": [
+                    {
+                      "not": {
+                        "equals": [
+                          "@triggerOutputs()?['body/new_documentnumber']",
+                          "@null"
+                        ]
+                      }
+                    },
+                    {
+                      "not": {
+                        "equals": [
+                          "@triggerOutputs()?['body/new_documenttype']",
+                          "@null"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "metadata": {
+                  "operationMetadataId": "b7f7ac37-e1ef-430b-a36c-0cdb192a6a5b"
+                },
+                "type": "If"
+              }
+            }
+          },
+          "expression": {
+            "and": [
+              {
+                "greater": [
+                  "@length(outputs('List_rows')?['body/value'])",
+                  1
+                ]
+              }
+            ]
+          },
+          "type": "If"
+        }
+      },
+      "outputs": {}
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

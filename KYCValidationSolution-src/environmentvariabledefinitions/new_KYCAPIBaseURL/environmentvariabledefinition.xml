@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="new_KYCAPIBaseURL">
+  <defaultvalue>https://dev-api.example.com</defaultvalue>
+  <displayname default="KYC API Base URL">
+    <label description="KYC API Base URL" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.2</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

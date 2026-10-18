@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{041c56f6-f7e9-42ce-97f0-04603d65f537}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{797444ac-908e-49a0-a855-ae6bf0492c17}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{5db0a920-109e-47a4-87cc-b82dd010d93a}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{4876507f-5386-4ec8-a27f-4530e65c04a4}">
+                        <labels>
+                          <label description="KYC Check" languagecode="1033" />
+                        </labels>
+                        <control id="cr9e4_kyccheck1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cr9e4_kyccheck1" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2b881f7e-bf08-43fb-b965-84618008c4f6}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{685c0e36-4e93-4ba7-81fe-89a495be84de}">
+                        <labels>
+                          <label description="Check Type" languagecode="1033" />
+                        </labels>
+                        <control id="cr9e4_checktype" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="cr9e4_checktype" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{552c49d5-353f-48b3-8a46-66761a081a59}">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="cr9e4_status" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="cr9e4_status" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2f5a1ca3-88fb-479c-9d30-4b1370cf5f75}">
+                        <labels>
+                          <label description="Source" languagecode="1033" />
+                        </labels>
+                        <control id="cr9e4_source" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="cr9e4_source" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c8152035-bf5e-468f-9d25-4b488c29ffc2}">
+                        <labels>
+                          <label description="Result" languagecode="1033" />
+                        </labels>
+                        <control id="cr9e4_result" classid="{e0dece4b-6fc8-4a8f-a065-082708572369}" datafieldname="cr9e4_result" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4ca44adc-b687-4689-a000-6d2305a230c7}">
+                        <labels>
+                          <label description="Result Status" languagecode="1033" />
+                        </labels>
+                        <control id="cr9e4_resultstatus" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="cr9e4_resultstatus" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7eb57dd2-9c81-4f30-989b-387c80cd971f}">
+                        <labels>
+                          <label description="Evidence" languagecode="1033" />
+                        </labels>
+                        <control id="cr9e4_evidence" classid="{e0dece4b-6fc8-4a8f-a065-082708572369}" datafieldname="cr9e4_evidence" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9e75a0a8-2c0c-45d5-b352-2c8384057d35}">
+                        <labels>
+                          <label description="Check Date" languagecode="1033" />
+                        </labels>
+                        <control id="cr9e4_checkdate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="cr9e4_checkdate" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

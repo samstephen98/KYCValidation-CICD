@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{f7032631-77a5-4395-ade8-cfe2d915f8d2}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="new_firstname" select="1" icon="1" preview="1">
+        <row name="result" id="new_customerid">
+          <cell name="new_firstname" width="300" />
+          <cell name="new_lastname" width="150" />
+          <cell name="new_email" width="150" />
+          <cell name="new_phone" width="150" />
+          <cell name="new_dateofbirth" width="150" />
+          <cell name="new_kycstatus" width="150" />
+          <cell name="new_risklevel" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="new_customer">
+          <attribute name="new_customerid" />
+          <attribute name="new_firstname" />
+          <attribute name="createdon" />
+          <order attribute="new_firstname" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="new_lastname" />
+          <attribute name="new_email" />
+          <attribute name="new_phone" />
+          <attribute name="new_dateofbirth" />
+          <attribute name="new_kycstatus" />
+          <attribute name="new_risklevel" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Customers" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

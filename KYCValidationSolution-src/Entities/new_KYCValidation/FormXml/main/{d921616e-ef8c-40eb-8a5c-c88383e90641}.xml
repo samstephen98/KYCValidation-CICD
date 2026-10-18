@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{d921616e-ef8c-40eb-8a5c-c88383e90641}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{E2D3C543-7A53-4897-8AAC-A33D2C66A960}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{33FF72D6-53AD-4160-8673-DBD5C7438214}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{726BE7C7-A2AD-476A-8F11-05409EF8142C}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="new_kycvalidation1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="new_KYCValidation1" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{E43931DD-E9DB-4A5D-8973-2B7E589F2EA8}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ce3a8305-eaf6-4fe7-a514-22dccdfafbcb}">
+                        <labels>
+                          <label description="Validation Date" languagecode="1033" />
+                        </labels>
+                        <control id="new_validationdate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="new_validationdate" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a01e3fbf-3c0d-478b-a522-2a80009246a6}">
+                        <labels>
+                          <label description="Validation Result" languagecode="1033" />
+                        </labels>
+                        <control id="new_validationresult" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="new_validationresult" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{353c340e-74d3-4816-b870-00bb8a66da6c}">
+                        <labels>
+                          <label description="Validation Remarks" languagecode="1033" />
+                        </labels>
+                        <control id="new_validationremarks" classid="{e0dece4b-6fc8-4a8f-a065-082708572369}" datafieldname="new_validationremarks" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{17d618d7-9b8f-4092-bb1a-2c28714f56cd}">
+                        <labels>
+                          <label description="Customer" languagecode="1033" />
+                        </labels>
+                        <control id="new_customer" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="new_customer" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

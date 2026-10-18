@@ -1,0 +1,872 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_c300ba96"
+        },
+        "runtimeSource": "invoker",
+        "connectionName": "e7e80cb60a7a40f29b10f65fea215ddc"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "CompanyName",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true,
+                  "description": "Legal or registered company name"
+                },
+                "text_1": {
+                  "title": "Country",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true,
+                  "description": "Country where the company is registered"
+                },
+                "text_2": {
+                  "title": "RelatedPersons",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true,
+                  "description": "Related persons provided for the KYC review. Use None if there are no related persons."
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2"
+              ]
+            }
+          },
+          "metadata": {
+            "associatedData": {
+              "graph": {
+                "name": "Start KYC Review",
+                "nodes": [
+                  {
+                    "id": "start-0fe179ab-f04e-4978-b98e-ce31d93946a4",
+                    "name": "When an agent calls the flow",
+                    "type": "start",
+                    "version": 1,
+                    "position": {
+                      "x": 250,
+                      "y": 0
+                    },
+                    "data": {
+                      "config": {
+                        "triggerType": "connector",
+                        "connector": {
+                          "apiName": "Skills",
+                          "operationName": "When_an_agent_calls_the_flow",
+                          "displayName": "When an agent calls the flow",
+                          "kind": "Skills",
+                          "inputs": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                "text": {
+                                  "title": "CompanyName",
+                                  "type": "string",
+                                  "x-ms-content-hint": "TEXT",
+                                  "x-ms-dynamically-added": true,
+                                  "description": "Legal or registered company name"
+                                },
+                                "text_1": {
+                                  "title": "Country",
+                                  "type": "string",
+                                  "x-ms-content-hint": "TEXT",
+                                  "x-ms-dynamically-added": true,
+                                  "description": "Country where the company is registered"
+                                },
+                                "text_2": {
+                                  "title": "RelatedPersons",
+                                  "type": "string",
+                                  "x-ms-content-hint": "TEXT",
+                                  "x-ms-dynamically-added": true,
+                                  "description": "Related persons provided for the KYC review. Use None if there are no related persons."
+                                }
+                              },
+                              "required": [
+                                "text",
+                                "text_1",
+                                "text_2"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "properties": {},
+                            "required": []
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 261,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "builtinFunction-368f69fa-46ad-4733-8773-84744965f266",
+                    "name": "Respond to the agent",
+                    "type": "builtinFunction",
+                    "version": 1,
+                    "position": {
+                      "x": 863,
+                      "y": -1
+                    },
+                    "data": {
+                      "config": {
+                        "operationId": "response",
+                        "operationName": "response",
+                        "displayName": "Respond to the agent",
+                        "category": "request",
+                        "categoryDisplayName": "Request",
+                        "iconUri": "",
+                        "brandColor": "",
+                        "parameters": {
+                          "schema": {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "title": "Response",
+                                "type": "string",
+                                "x-ms-content-hint": "TEXT",
+                                "x-ms-dynamically-added": true
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          },
+                          "body": {
+                            "text": "KYC review has been initiated successfully for the company."
+                          }
+                        },
+                        "description": "Respond to the calling agent with typed outputs.",
+                        "kind": "Skills"
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "description": "Function output"
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 240,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "connector-6905c650-0b29-4612-8f98-fdc27f07569f",
+                    "name": "Add a new row",
+                    "type": "connector",
+                    "version": 1,
+                    "position": {
+                      "x": 587,
+                      "y": -94
+                    },
+                    "data": {
+                      "config": {
+                        "apiName": "shared_commondataserviceforapps",
+                        "displayName": "Microsoft Dataverse",
+                        "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1827/1.0.1827.4939/commondataserviceforapps/icon.png",
+                        "brandColor": "#088142",
+                        "operationName": "CreateRecord",
+                        "operationType": "OpenApiConnection",
+                        "parametersSchema": {
+                          "type": "object",
+                          "properties": {
+                            "x-ms-odata-metadata-full": {
+                              "type": "boolean",
+                              "title": "Return Full Metadata",
+                              "description": "The header parameter to customer to opt-in returning full odata metadata in response.",
+                              "x-ms-visibility": "advanced",
+                              "x-ms-property-name-alias": "x-ms-odata-metadata-full"
+                            },
+                            "entityName": {
+                              "type": "string",
+                              "title": "Table name",
+                              "x-ms-dynamic-list": {
+                                "operationId": "GetEntities",
+                                "parameters": {},
+                                "itemsPath": "value",
+                                "itemValuePath": "EntitySetName",
+                                "itemTitlePath": "DisplayCollectionName/UserLocalizedLabel/Label"
+                              },
+                              "description": "Choose a table",
+                              "minLength": 1,
+                              "x-ms-property-name-alias": "entityName"
+                            },
+                            "item": {
+                              "type": "object",
+                              "title": "Row Item",
+                              "x-ms-dynamic-properties": {
+                                "operationId": "GetMetadataForPostEntity",
+                                "parameters": {
+                                  "entityName": {
+                                    "parameterReference": "entityName",
+                                    "required": true
+                                  }
+                                },
+                                "itemValuePath": "schema"
+                              },
+                              "description": "Row to create",
+                              "x-ms-property-name-alias": "item"
+                            }
+                          },
+                          "required": [
+                            "entityName",
+                            "item"
+                          ]
+                        },
+                        "connectionName": "shared_commondataserviceforapps-1",
+                        "parameters": {
+                          "entityName": "cr9e4_kycmasters",
+                          "item/cr9e4_relatedperson": "",
+                          "item/cr9e4_companyname": "@triggerOutputs()?['body/text']",
+                          "item/cr9e4_newcolumn": "@triggerOutputs()?['body/text_1']"
+                        },
+                        "resolvedDynamicSchemas": {
+                          "item": {
+                            "type": "object",
+                            "properties": {
+                              "cr9e4_address": {
+                                "type": "string",
+                                "title": "Address",
+                                "description": "",
+                                "maxLength": 2000,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cr9e4_address"
+                              },
+                              "cr9e4_companyname": {
+                                "type": "string",
+                                "title": "Company Name",
+                                "description": "",
+                                "maxLength": 100,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cr9e4_companyname"
+                              },
+                              "cr9e4_newcolumn": {
+                                "type": "string",
+                                "title": "Country",
+                                "description": "",
+                                "maxLength": 100,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cr9e4_newcolumn"
+                              },
+                              "importsequencenumber": {
+                                "type": "integer",
+                                "title": "Import Sequence Number",
+                                "format": "int32",
+                                "description": "Sequence number of the import that created this record.",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "importsequencenumber"
+                              },
+                              "cr9e4_kycmasterid": {
+                                "type": "string",
+                                "title": "KYC Master",
+                                "format": "guid",
+                                "description": "Unique identifier for entity instances",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cr9e4_kycmasterid"
+                              },
+                              "cr9e4_legalname": {
+                                "type": "string",
+                                "title": "Legal Name",
+                                "description": "",
+                                "maxLength": 100,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cr9e4_legalname"
+                              },
+                              "cr9e4_overallstatus": {
+                                "type": "integer",
+                                "title": "Overall status",
+                                "x-ms-dynamic-list": {
+                                  "operationId": "GetOptionSetMetadataWithEntitySetName",
+                                  "parameters": {
+                                    "entityName": {
+                                      "parameterReference": "entityName",
+                                      "required": true
+                                    },
+                                    "attributeMetadataId": {
+                                      "value": "80d5a283-89b6-f111-b377-7ced8d9ed123"
+                                    },
+                                    "type": {
+                                      "value": "Picklist"
+                                    }
+                                  },
+                                  "itemsPath": "value",
+                                  "itemValuePath": "value",
+                                  "itemTitlePath": "Label/UserLocalizedLabel/Label"
+                                },
+                                "format": "int32",
+                                "description": "",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cr9e4_overallstatus"
+                              },
+                              "ownerid@odata.bind": {
+                                "type": "string",
+                                "title": "Owner (Owners)",
+                                "description": "Owner Id",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "ownerid@odata.bind"
+                              },
+                              "overriddencreatedon": {
+                                "type": "string",
+                                "title": "Record Created On",
+                                "format": "date-time",
+                                "description": "Date and time that the record was migrated.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "overriddencreatedon"
+                              },
+                              "cr9e4_registrationnumber": {
+                                "type": "string",
+                                "title": "Registration Number",
+                                "description": "",
+                                "maxLength": 100,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cr9e4_registrationnumber"
+                              },
+                              "cr9e4_relatedperson": {
+                                "type": "string",
+                                "title": "Related Person",
+                                "description": "",
+                                "maxLength": 2000,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cr9e4_relatedperson"
+                              },
+                              "statuscode": {
+                                "type": "integer",
+                                "title": "Status Reason",
+                                "x-ms-dynamic-list": {
+                                  "operationId": "GetOptionSetMetadataWithEntitySetName",
+                                  "parameters": {
+                                    "entityName": {
+                                      "parameterReference": "entityName",
+                                      "required": true
+                                    },
+                                    "attributeMetadataId": {
+                                      "value": "eb2ad063-0be4-4eb5-9391-1da9268fc25d"
+                                    },
+                                    "type": {
+                                      "value": "Status"
+                                    }
+                                  },
+                                  "itemsPath": "value",
+                                  "itemValuePath": "value",
+                                  "itemTitlePath": "Label/UserLocalizedLabel/Label"
+                                },
+                                "format": "int32",
+                                "description": "Reason for the status of the KYC Master",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "statuscode"
+                              },
+                              "timezoneruleversionnumber": {
+                                "type": "integer",
+                                "title": "Time Zone Rule Version Number",
+                                "format": "int32",
+                                "description": "For internal use only.",
+                                "maximum": 2147483647,
+                                "minimum": -1,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "timezoneruleversionnumber"
+                              },
+                              "utcconversiontimezonecode": {
+                                "type": "integer",
+                                "title": "UTC Conversion Time Zone Code",
+                                "format": "int32",
+                                "description": "Time zone code that was in use when the record was created.",
+                                "maximum": 2147483647,
+                                "minimum": -1,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "utcconversiontimezonecode"
+                              }
+                            },
+                            "required": []
+                          }
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "properties": {
+                              "cr9e4_address": {
+                                "type": "string",
+                                "title": "Address",
+                                "description": "",
+                                "maxLength": 2000,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/cr9e4_address"
+                              },
+                              "cr9e4_companyname": {
+                                "type": "string",
+                                "title": "Company Name",
+                                "description": "",
+                                "maxLength": 100,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/cr9e4_companyname"
+                              },
+                              "cr9e4_newcolumn": {
+                                "type": "string",
+                                "title": "Country",
+                                "description": "",
+                                "maxLength": 100,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/cr9e4_newcolumn"
+                              },
+                              "_createdonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname": {
+                                "type": "string",
+                                "title": "Created By (Delegate) (Type)",
+                                "description": "Unique identifier of the delegate user who created the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_createdonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname"
+                              },
+                              "_createdonbehalfby_value": {
+                                "type": "string",
+                                "title": "Created By (Delegate) (Value)",
+                                "description": "Unique identifier of the delegate user who created the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_createdonbehalfby_value"
+                              },
+                              "_createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname": {
+                                "type": "string",
+                                "title": "Created By (Type)",
+                                "description": "Unique identifier of the user who created the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname"
+                              },
+                              "_createdby_value": {
+                                "type": "string",
+                                "title": "Created By (Value)",
+                                "description": "Unique identifier of the user who created the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_createdby_value"
+                              },
+                              "createdon": {
+                                "type": "string",
+                                "title": "Created On",
+                                "format": "date-time",
+                                "description": "Date and time when the record was created.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/createdon"
+                              },
+                              "importsequencenumber": {
+                                "type": "integer",
+                                "title": "Import Sequence Number",
+                                "format": "int32",
+                                "description": "Sequence number of the import that created this record.",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/importsequencenumber"
+                              },
+                              "cr9e4_kycmasterid": {
+                                "type": "string",
+                                "title": "KYC Master",
+                                "format": "guid",
+                                "description": "Unique identifier for entity instances",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/cr9e4_kycmasterid"
+                              },
+                              "cr9e4_legalname": {
+                                "type": "string",
+                                "title": "Legal Name",
+                                "description": "",
+                                "maxLength": 100,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/cr9e4_legalname"
+                              },
+                              "_modifiedonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname": {
+                                "type": "string",
+                                "title": "Modified By (Delegate) (Type)",
+                                "description": "Unique identifier of the delegate user who modified the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_modifiedonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname"
+                              },
+                              "_modifiedonbehalfby_value": {
+                                "type": "string",
+                                "title": "Modified By (Delegate) (Value)",
+                                "description": "Unique identifier of the delegate user who modified the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_modifiedonbehalfby_value"
+                              },
+                              "_modifiedby_value@Microsoft.Dynamics.CRM.lookuplogicalname": {
+                                "type": "string",
+                                "title": "Modified By (Type)",
+                                "description": "Unique identifier of the user who modified the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_modifiedby_value@Microsoft.Dynamics.CRM.lookuplogicalname"
+                              },
+                              "_modifiedby_value": {
+                                "type": "string",
+                                "title": "Modified By (Value)",
+                                "description": "Unique identifier of the user who modified the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_modifiedby_value"
+                              },
+                              "modifiedon": {
+                                "type": "string",
+                                "title": "Modified On",
+                                "format": "date-time",
+                                "description": "Date and time when the record was modified.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/modifiedon"
+                              },
+                              "@odata.id": {
+                                "type": "string",
+                                "title": "OData Id",
+                                "description": "OData row id",
+                                "x-ms-visibility": "important",
+                                "x-ms-property-name-alias": "body/@odata.id"
+                              },
+                              "cr9e4_overallstatus": {
+                                "type": "integer",
+                                "title": "Overall status",
+                                "x-ms-dynamic-list": {
+                                  "operationId": "GetOptionSetMetadataWithEntitySetName",
+                                  "parameters": {
+                                    "entityName": {
+                                      "parameterReference": "entityName",
+                                      "required": true
+                                    },
+                                    "attributeMetadataId": {
+                                      "value": "80d5a283-89b6-f111-b377-7ced8d9ed123"
+                                    },
+                                    "type": {
+                                      "value": "Picklist"
+                                    }
+                                  },
+                                  "itemsPath": "value",
+                                  "itemValuePath": "value",
+                                  "itemTitlePath": "Label/UserLocalizedLabel/Label"
+                                },
+                                "format": "int32",
+                                "description": "",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/cr9e4_overallstatus"
+                              },
+                              "_ownerid_value@Microsoft.Dynamics.CRM.lookuplogicalname": {
+                                "type": "string",
+                                "title": "Owner (Type)",
+                                "description": "Owner Id",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_ownerid_value@Microsoft.Dynamics.CRM.lookuplogicalname"
+                              },
+                              "_ownerid_value": {
+                                "type": "string",
+                                "title": "Owner (Value)",
+                                "description": "Owner Id",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_ownerid_value"
+                              },
+                              "_owningbusinessunit_value@Microsoft.Dynamics.CRM.lookuplogicalname": {
+                                "type": "string",
+                                "title": "Owning Business Unit (Type)",
+                                "description": "Unique identifier for the business unit that owns the record",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_owningbusinessunit_value@Microsoft.Dynamics.CRM.lookuplogicalname"
+                              },
+                              "_owningbusinessunit_value": {
+                                "type": "string",
+                                "title": "Owning Business Unit (Value)",
+                                "description": "Unique identifier for the business unit that owns the record",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_owningbusinessunit_value"
+                              },
+                              "_owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname": {
+                                "type": "string",
+                                "title": "Owning Team (Type)",
+                                "description": "Unique identifier for the team that owns the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname"
+                              },
+                              "_owningteam_value": {
+                                "type": "string",
+                                "title": "Owning Team (Value)",
+                                "description": "Unique identifier for the team that owns the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_owningteam_value"
+                              },
+                              "_owninguser_value@Microsoft.Dynamics.CRM.lookuplogicalname": {
+                                "type": "string",
+                                "title": "Owning User (Type)",
+                                "description": "Unique identifier for the user that owns the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_owninguser_value@Microsoft.Dynamics.CRM.lookuplogicalname"
+                              },
+                              "_owninguser_value": {
+                                "type": "string",
+                                "title": "Owning User (Value)",
+                                "description": "Unique identifier for the user that owns the record.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/_owninguser_value"
+                              },
+                              "overriddencreatedon": {
+                                "type": "string",
+                                "title": "Record Created On",
+                                "format": "date-time",
+                                "description": "Date and time that the record was migrated.",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/overriddencreatedon"
+                              },
+                              "cr9e4_registrationnumber": {
+                                "type": "string",
+                                "title": "Registration Number",
+                                "description": "",
+                                "maxLength": 100,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/cr9e4_registrationnumber"
+                              },
+                              "cr9e4_relatedperson": {
+                                "type": "string",
+                                "title": "Related Person",
+                                "description": "",
+                                "maxLength": 2000,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/cr9e4_relatedperson"
+                              },
+                              "statecode": {
+                                "type": "integer",
+                                "title": "Status",
+                                "x-ms-dynamic-list": {
+                                  "operationId": "GetOptionSetMetadataWithEntitySetName",
+                                  "parameters": {
+                                    "entityName": {
+                                      "parameterReference": "entityName",
+                                      "required": true
+                                    },
+                                    "attributeMetadataId": {
+                                      "value": "e660007c-d55c-413c-a613-3c396643274e"
+                                    },
+                                    "type": {
+                                      "value": "State"
+                                    }
+                                  },
+                                  "itemsPath": "value",
+                                  "itemValuePath": "value",
+                                  "itemTitlePath": "Label/UserLocalizedLabel/Label"
+                                },
+                                "format": "int32",
+                                "description": "Status of the KYC Master",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/statecode"
+                              },
+                              "statuscode": {
+                                "type": "integer",
+                                "title": "Status Reason",
+                                "x-ms-dynamic-list": {
+                                  "operationId": "GetOptionSetMetadataWithEntitySetName",
+                                  "parameters": {
+                                    "entityName": {
+                                      "parameterReference": "entityName",
+                                      "required": true
+                                    },
+                                    "attributeMetadataId": {
+                                      "value": "eb2ad063-0be4-4eb5-9391-1da9268fc25d"
+                                    },
+                                    "type": {
+                                      "value": "Status"
+                                    }
+                                  },
+                                  "itemsPath": "value",
+                                  "itemValuePath": "value",
+                                  "itemTitlePath": "Label/UserLocalizedLabel/Label"
+                                },
+                                "format": "int32",
+                                "description": "Reason for the status of the KYC Master",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/statuscode"
+                              },
+                              "timezoneruleversionnumber": {
+                                "type": "integer",
+                                "title": "Time Zone Rule Version Number",
+                                "format": "int32",
+                                "description": "For internal use only.",
+                                "maximum": 2147483647,
+                                "minimum": -1,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/timezoneruleversionnumber"
+                              },
+                              "utcconversiontimezonecode": {
+                                "type": "integer",
+                                "title": "UTC Conversion Time Zone Code",
+                                "format": "int32",
+                                "description": "Time zone code that was in use when the record was created.",
+                                "maximum": 2147483647,
+                                "minimum": -1,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/utcconversiontimezonecode"
+                              },
+                              "versionnumber": {
+                                "type": "integer",
+                                "title": "Version Number",
+                                "format": "int64",
+                                "description": "Version Number",
+                                "maximum": 9223372036854776000,
+                                "minimum": -9223372036854776000,
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "body/versionnumber"
+                              }
+                            },
+                            "required": []
+                          }
+                        }
+                      ],
+                      "settings": {
+                        "secureInputs": {
+                          "isSupported": true,
+                          "value": false
+                        }
+                      }
+                    },
+                    "measured": {
+                      "width": 240,
+                      "height": 66
+                    },
+                    "selected": true
+                  }
+                ],
+                "edges": [
+                  {
+                    "id": "edge-start-0fe179ab-f04e-4978-b98e-ce31d93946a4-connector-6905c650-0b29-4612-8f98-fdc27f07569f",
+                    "source": "start-0fe179ab-f04e-4978-b98e-ce31d93946a4",
+                    "target": "connector-6905c650-0b29-4612-8f98-fdc27f07569f"
+                  },
+                  {
+                    "id": "edge-connector-6905c650-0b29-4612-8f98-fdc27f07569f-builtinFunction-368f69fa-46ad-4733-8773-84744965f266",
+                    "source": "connector-6905c650-0b29-4612-8f98-fdc27f07569f",
+                    "target": "builtinFunction-368f69fa-46ad-4733-8773-84744965f266"
+                  }
+                ],
+                "connectionReferences": {
+                  "shared_commondataserviceforapps-1": {
+                    "api": {
+                      "name": "shared_commondataserviceforapps"
+                    },
+                    "connection": {
+                      "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_c300ba96"
+                    },
+                    "runtimeSource": "invoker",
+                    "connectionName": "e7e80cb60a7a40f29b10f65fea215ddc"
+                  }
+                }
+              },
+              "nodeActionMapping": {
+                "connector-6905c650-0b29-4612-8f98-fdc27f07569f": [
+                  "Add_a_new_row"
+                ],
+                "builtinFunction-368f69fa-46ad-4733-8773-84744965f266": [
+                  "Respond_to_the_agent"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "actions": {
+        "Add_a_new_row": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "cr9e4_kycmasters",
+              "item/cr9e4_companyname": "@triggerOutputs()?['body/text']",
+              "item/cr9e4_newcolumn": "@triggerOutputs()?['body/text_1']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps-1",
+              "operationId": "CreateRecord"
+            }
+          },
+          "metadata": {
+            "description": "Add a new row",
+            "nodeId": "connector-6905c650-0b29-4612-8f98-fdc27f07569f"
+          }
+        },
+        "Respond_to_the_agent": {
+          "type": "Response",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "Response",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ]
+            },
+            "statusCode": 200,
+            "body": {
+              "text": "KYC review has been initiated successfully for the company."
+            }
+          },
+          "runAfter": {
+            "Add_a_new_row": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "description": "Respond to the agent",
+            "nodeId": "builtinFunction-368f69fa-46ad-4733-8773-84744965f266"
+          }
+        }
+      },
+      "outputs": {},
+      "metadata": {
+        "telemetryMetadata": {
+          "creationSource": "WorkflowDesigner",
+          "modifiedSources": "WorkflowDesigner"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}
