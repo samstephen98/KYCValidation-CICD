@@ -23,7 +23,7 @@ jobs:
         with:
           solution-file: out/KYCValidationSolution.zip
           solution-folder: KYCValidationSolution-src
-          solution-type: Managed
+          solution-type: Unmanaged
 
       - name: Import managed solution
         uses: microsoft/powerplatform-actions/import-solution@v1
